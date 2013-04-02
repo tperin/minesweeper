@@ -7,12 +7,12 @@ public class Minesweeper {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		Minesweeper ms = new Minesweeper(5,5);
+		ms.printBoard();
 	}
 	
 	public Minesweeper(int x, int y) {
-		board = randBoard(x,y,20);
+		randBoard(x,y,20);
 		revealBoard = new boolean[x][y];
 		
 		for (int i = 0; i < x; i++) {
@@ -23,7 +23,12 @@ public class Minesweeper {
 	}
 	
 	private void printBoard() {
-		
+		for (int x = 0; x < board.length; x++) {
+			for (int y = 0; y < board[x].length; y++) {
+				System.out.print(board[x][y]);
+			}
+			System.out.println();
+		}
 	}
 	
 	/**
@@ -33,8 +38,8 @@ public class Minesweeper {
 	 * @param pr probability of bombs, given as number between 1 and 100
 	 * @return the generated board
 	 */
-	public static char[][] randBoard(int x, int y, int pr) {
-		char[][] board = new char[x][y];
+	public void randBoard(int x, int y, int pr) {
+		board = new char[x][y];
 		for (int i = 0; i < x; i++) {
 			for (int j = 0; j < y; j++) {
 				//chance of bomb will be 1/n
@@ -47,11 +52,19 @@ public class Minesweeper {
 				else board[i][j] = 'U';
 			}
 		}
-		
-		return board;
+
+		fillWithNums();
 	}
 	
-	public int bombNum(int x, int y) {
+	private void fillWithNums() {
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board[i].length; j++) {
+				if (board[i][j] != 'B') board[i][j] = (char) ('0' + bombNum(i,j));
+			}
+		}
+	}
+	
+	private int bombNum(int x, int y) {
 		int count = 0;
 		//check the 3 spaces left of (x,y) for bombs
 		if (y > 0) {
