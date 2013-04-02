@@ -33,6 +33,11 @@ public class Minesweeper {
 		}
 	}
 	
+	/**
+	 * Constructor using variable board size and sets board randomly
+	 * @param x amount of rows for board
+	 * @param y amount of columns for board
+	 */
 	public Minesweeper(int x, int y) {
 		randBoard(x,y,20);
 		revealBoard = new boolean[x][y];
@@ -44,12 +49,21 @@ public class Minesweeper {
 		}
 	}
 	
+	/**
+	 * Reveals a cell
+	 * @param x x coordinate of cell to reveal
+	 * @param y y coordinate of cell to reveal
+	 * @return false if cell has been revealed, true if cell is succesfully revealed
+	 */
 	private boolean revealCell(int x, int y) {
 		if (revealBoard[x][y]) return false;
 		revealBoard[x][y] = true;
 		return true;
 	}
 	
+	/**
+	 * Prints out the board, only showing revealed cells
+	 */
 	private void printBoard() {
 		for (int x = 0; x < board.length; x++) {
 			for (int y = 0; y < board[x].length; y++) {
@@ -85,6 +99,9 @@ public class Minesweeper {
 		fillWithNums();
 	}
 	
+	/**
+	 * Fills randomized board with bomb numbers in cells
+	 */
 	private void fillWithNums() {
 		for (int i = 0; i < board.length; i++) {
 			for (int j = 0; j < board[i].length; j++) {
@@ -93,6 +110,10 @@ public class Minesweeper {
 		}
 	}
 	
+	/**
+	 * Checks if the game is over by checking if any bombs were revealed
+	 * @return true if game over, false is not
+	 */
 	private boolean isGameOver() {
 		for (int i = 0; i < board.length; i++) {
 			for (int j = 0; j < board[i].length; j++) {
@@ -102,6 +123,12 @@ public class Minesweeper {
 		return false;
 	}
 	
+	/**
+	 * Counts the adjacent bombs to the given cell
+	 * @param x x coordinate of the cell to check
+	 * @param y y coordinate of the cell to check
+	 * @return number of adjacent bombs
+	 */
 	private int bombNum(int x, int y) {
 		int count = 0;
 		//check the 3 spaces left of (x,y) for bombs
