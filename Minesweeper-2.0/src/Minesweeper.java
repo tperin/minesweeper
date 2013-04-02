@@ -11,10 +11,17 @@ public class Minesweeper {
 		ms.printBoard();
 		boolean quit = false;
 		while (!quit) {
-			System.out.println("Enter x coordinate to check");
-			int xCheck = IO.readInt();
-			System.out.println("Enter y coordinate to check");
-			int yCheck = IO.readInt();
+			int xCheck = -1;
+			int yCheck = -1;
+			while (xCheck < 0 || xCheck >= ms.getBoardWidth() || yCheck < 0 || yCheck >= ms.getBoardLength()) {
+				System.out.println("Enter x coordinate to check");
+				xCheck = IO.readInt();
+				System.out.println("Enter y coordinate to check");
+				yCheck = IO.readInt();
+				if (xCheck < 0 || xCheck >= ms.getBoardWidth() || yCheck < 0 || yCheck >= ms.getBoardLength()) {
+					System.out.println("Given coordinates are out of bounds, try again");
+				}
+			}	
 			if (!ms.revealCell(xCheck, yCheck)) {
 				System.out.println("You have already checked this cell");
 			}
@@ -157,6 +164,12 @@ public class Minesweeper {
 			}
 		}
 		return count;
+	}
+	public int getBoardWidth() {
+		return board.length;
+	}
+	public int getBoardLength() {
+		return board[0].length;
 	}
 
 }
