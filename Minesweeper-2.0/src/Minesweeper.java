@@ -15,10 +15,11 @@ public class Minesweeper {
 			int xCheck = IO.readInt();
 			System.out.println("Enter y coordinate to check");
 			int yCheck = IO.readInt();
-			if (!ms.revealCell(xCheck, yCheck)) {
+			if (ms.isRevealed(xCheck, yCheck)) {
 				System.out.println("You have already checked this cell");
 			}
 			else {
+				ms.revealCell(xCheck, yCheck);
 				ms.printBoard();
 			
 				if (ms.isGameOver()) {
@@ -55,10 +56,13 @@ public class Minesweeper {
 	 * @param y y coordinate of cell to reveal
 	 * @return false if cell has been revealed, true if cell is succesfully revealed
 	 */
-	private boolean revealCell(int x, int y) {
-		if (revealBoard[x][y]) return false;
+	private void revealCell(int x, int y) {
 		revealBoard[x][y] = true;
-		return true;
+		
+	}
+	
+	private boolean isRevealed(int x, int y) {
+		return revealBoard[x][y];
 	}
 	
 	/**
