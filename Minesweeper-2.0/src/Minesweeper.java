@@ -49,7 +49,7 @@ public class Minesweeper {
 	private void printBoard() {
 		for (int x = 0; x < board.length; x++) {
 			for (int y = 0; y < board[x].length; y++) {
-				if (revealBoard[x][y]) System.out.print(board[x][y]);
+				if (revealBoard[x][y]) System.out.print(" " + board[x][y] + " ");
 				else System.out.print("[]");
 			}
 			System.out.println();
