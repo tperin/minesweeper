@@ -22,6 +22,12 @@ public class Minesweeper {
 		}
 	}
 	
+	private boolean revealCell(int x, int y) {
+		if (revealBoard[x][y]) return false;
+		revealBoard[x][y] = true;
+		return true;
+	}
+	
 	private void printBoard() {
 		for (int x = 0; x < board.length; x++) {
 			for (int y = 0; y < board[x].length; y++) {
