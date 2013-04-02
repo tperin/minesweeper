@@ -16,10 +16,16 @@ public class Minesweeper {
 			System.out.println("Enter y coordinate to check");
 			int yCheck = IO.readInt();
 			ms.revealCell(xCheck, yCheck);
-			
 			ms.printBoard();
-			System.out.println("Quit?");
-			quit = IO.readBoolean();
+			
+			if (ms.isGameOver()) {
+				System.out.println("GAME OVER");
+				quit = true;
+			}
+			else {
+				System.out.println("Quit?");
+				quit = IO.readBoolean();
+			}
 		}
 	}
 	
@@ -81,6 +87,15 @@ public class Minesweeper {
 				if (board[i][j] != 'B') board[i][j] = (char) ('0' + bombNum(i,j));
 			}
 		}
+	}
+	
+	private boolean isGameOver() {
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board[i].length; j++) {
+				if (board[i][j] == 'B' && revealBoard[i][j]) return true;
+			}
+		}
+		return false;
 	}
 	
 	private int bombNum(int x, int y) {
