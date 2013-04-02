@@ -1,7 +1,7 @@
 
 public class Minesweeper {
 	private char[][] board;
-	private boolean revealBoard;
+	private boolean[][] revealBoard;
 	
 	/**
 	 * @param args
@@ -12,6 +12,17 @@ public class Minesweeper {
 	}
 	
 	public Minesweeper(int x, int y) {
+		board = randBoard(x,y,20);
+		revealBoard = new boolean[x][y];
+		
+		for (int i = 0; i < x; i++) {
+			for (int j = 0; j < y; j++) {
+				revealBoard[i][j] = false;
+			}
+		}
+	}
+	
+	private void printBoard() {
 		
 	}
 	
