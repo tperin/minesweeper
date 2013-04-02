@@ -9,6 +9,18 @@ public class Minesweeper {
 	public static void main(String[] args) {
 		Minesweeper ms = new Minesweeper(5,5);
 		ms.printBoard();
+		boolean quit = false;
+		while (!quit) {
+			System.out.println("Enter x coordinate to check");
+			int xCheck = IO.readInt();
+			System.out.println("Enter y coordinate to check");
+			int yCheck = IO.readInt();
+			ms.revealCell(xCheck, yCheck);
+			
+			ms.printBoard();
+			System.out.println("Quit?");
+			quit = IO.readBoolean();
+		}
 	}
 	
 	public Minesweeper(int x, int y) {
