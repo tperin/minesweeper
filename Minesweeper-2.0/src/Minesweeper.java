@@ -15,16 +15,20 @@ public class Minesweeper {
 			int xCheck = IO.readInt();
 			System.out.println("Enter y coordinate to check");
 			int yCheck = IO.readInt();
-			ms.revealCell(xCheck, yCheck);
-			ms.printBoard();
-			
-			if (ms.isGameOver()) {
-				System.out.println("GAME OVER");
-				quit = true;
+			if (!ms.revealCell(xCheck, yCheck)) {
+				System.out.println("You have already checked this cell");
 			}
 			else {
-				System.out.println("Quit?");
-				quit = IO.readBoolean();
+				ms.printBoard();
+			
+				if (ms.isGameOver()) {
+					System.out.println("GAME OVER");
+					quit = true;
+				}
+				else {
+					System.out.println("Quit?");
+					quit = IO.readBoolean();
+				}
 			}
 		}
 	}
