@@ -50,5 +50,38 @@ public class Minesweeper {
 		
 		return board;
 	}
+	
+	public int bombNum(int x, int y) {
+		int count = 0;
+		//check the 3 spaces left of (x,y) for bombs
+		if (y > 0) {
+			if (board[x][y-1] == 'B') count++;
+			if (x > 0) {
+				if (board[x-1][y-1] == 'B') count++;
+			}
+			if (x < board.length - 1) {
+				if (board[x+1][y-1] == 'B') count++;
+			}
+		}
+		//check space above (x,y) for bomb
+		if (x > 0) {
+			if (board[x-1][y] == 'B') count++;
+		}
+		//check space below (x,y) for bomb
+		if (x < board.length - 1) {
+			if (board[x+1][y] == 'B') count++;
+		}
+		//check the 3 spaces to the right of (x,y) for bombs
+		if (y < board[0].length - 1) {
+			if (board[x][y+1] == 'B') count++;
+			if (x > 0) {
+				if (board[x-1][y+1] == 'B') count++;
+			}
+			if (x < board.length - 1) {
+				if (board[x+1][y+1] == 'B') count++;
+			}
+		}
+		return count;
+	}
 
 }
