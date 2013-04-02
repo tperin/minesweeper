@@ -67,31 +67,33 @@ public class Minesweeper {
 		revealBoard[x][y] = true;
 
 		//Start cascading reveal mess
-		if (y > 0) {
-			if (board[x][y-1] == '0' && !isRevealed(x,y-1)) revealCell(x,y-1);
+		if (board[x][y] == '0') {
+			if (y > 0) {
+				if (board[x][y-1] == '0' && !isRevealed(x,y-1)) revealCell(x,y-1);
+				if (x > 0) {
+					if (board[x-1][y-1] == '0' && !isRevealed(x-1,y-1)) revealCell(x-1,y-1);
+				}
+				if (x < board.length - 1) {
+					if (board[x+1][y-1] == '0' && !isRevealed(x+1,y-1)) revealCell(x+1,y-1);
+				}
+			}
+
 			if (x > 0) {
-				if (board[x-1][y-1] == '0' && !isRevealed(x-1,y-1)) revealCell(x-1,y-1);
+				if (board[x-1][y] == '0' && !isRevealed(x-1,y)) revealCell(x-1,y);
 			}
+
 			if (x < board.length - 1) {
-				if (board[x+1][y-1] == '0' && !isRevealed(x+1,y-1)) revealCell(x+1,y-1);
+				if (board[x+1][y] == '0' && !isRevealed(x+1,y)) revealCell(x+1,y);
 			}
-		}
 
-		if (x > 0) {
-			if (board[x-1][y] == '0' && !isRevealed(x-1,y)) revealCell(x-1,y);
-		}
-
-		if (x < board.length - 1) {
-			if (board[x+1][y] == '0' && !isRevealed(x+1,y)) revealCell(x+1,y);
-		}
-
-		if (y < board[0].length - 1) {
-			if (board[x][y+1] == '0' && !isRevealed(x,y+1)) revealCell(x,y+1);
-			if (x > 0) {
-				if (board[x-1][y+1] == '0' && !isRevealed(x-1,y+1)) revealCell(x-1,y+1);
-			}
-			if (x < board.length - 1) {
-				if (board[x+1][y+1] == '0' && !isRevealed(x+1,y+1)) revealCell(x+1,y+1);
+			if (y < board[0].length - 1) {
+				if (board[x][y+1] == '0' && !isRevealed(x,y+1)) revealCell(x,y+1);
+				if (x > 0) {
+					if (board[x-1][y+1] == '0' && !isRevealed(x-1,y+1)) revealCell(x-1,y+1);
+				}
+				if (x < board.length - 1) {
+					if (board[x+1][y+1] == '0' && !isRevealed(x+1,y+1)) revealCell(x+1,y+1);
+				}
 			}
 		}
 		//End cascading reveal mess
