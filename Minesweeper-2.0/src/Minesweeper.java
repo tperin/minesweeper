@@ -1,7 +1,7 @@
 
 public class Minesweeper {
 	private char[][] board;
-	private boolean[][] revealBoard;
+	private char[][] revealBoard;
 	
 	/**
 	 * @param args
@@ -48,11 +48,11 @@ public class Minesweeper {
 	 */
 	public Minesweeper(int x, int y) {
 		randBoard(x,y,20);
-		revealBoard = new boolean[x][y];
+		revealBoard = new char[x][y];
 		
 		for (int i = 0; i < x; i++) {
 			for (int j = 0; j < y; j++) {
-				revealBoard[i][j] = false;
+				revealBoard[i][j] = 'N';
 			}
 		}
 	}
@@ -64,7 +64,7 @@ public class Minesweeper {
 	 * @return false if cell has been revealed, true if cell is succesfully revealed
 	 */
 	private void revealCell(int x, int y) {
-		revealBoard[x][y] = true;
+		revealBoard[x][y] = 'Y';
 
 		//Start cascading reveal mess
 		if (board[x][y] == '0') {
@@ -100,7 +100,7 @@ public class Minesweeper {
 	}
 	
 	private boolean isRevealed(int x, int y) {
-		return revealBoard[x][y];
+		return revealBoard[x][y] == 'Y';
 	}
 	
 	/**
@@ -109,7 +109,7 @@ public class Minesweeper {
 	private void printBoard() {
 		for (int x = 0; x < board.length; x++) {
 			for (int y = 0; y < board[x].length; y++) {
-				if (revealBoard[x][y]) System.out.print(" " + board[x][y] + " ");
+				if (isRevealed(x,y)) System.out.print(" " + board[x][y] + " ");
 				else System.out.print("[ ]");
 			}
 			System.out.println();
@@ -156,7 +156,7 @@ public class Minesweeper {
 	private boolean isGameOver() {
 		for (int i = 0; i < board.length; i++) {
 			for (int j = 0; j < board[i].length; j++) {
-				if (board[i][j] == 'B' && revealBoard[i][j]) return true;
+				if (board[i][j] == 'B' && isRevealed(i,j)) return true;
 			}
 		}
 		return false;
